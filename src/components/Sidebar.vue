@@ -1,5 +1,5 @@
 <script setup>
-
+import {authStore} from '../store/store'
 </script>
 
 <template>
@@ -9,6 +9,15 @@
         <li><router-link to="/about">About</router-link></li>
         <li><router-link to="/contact">Contact</router-link></li>
         <li><router-link to="/posts">Blog</router-link></li>
+        <li><router-link to="/protected">Protected</router-link></li>
+        <li><router-link to="/login">
+            <span v-if="authStore.isAuthenticate">
+                Profile
+            </span>
+            <span v-else>
+                Login
+            </span>
+        </router-link></li>
         </ul>
     </section>
 </template>

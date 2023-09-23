@@ -5,6 +5,9 @@ import Contact from '../components/Contact.vue'
 import Posts from '../components/Posts.vue'
 import Post from '../components/Post.vue'
 import Sidebar from '../components/Sidebar.vue'
+import Protected from '../components/Protected.vue'
+import Login from '../components/Login.vue'
+import {authStore}  from '../store/store';
 
 const routes = [
     {
@@ -37,12 +40,35 @@ const routes = [
             LeftSideBar: Sidebar
         },
         name: 'post'
+    },
+    {
+        path : '/protected', components: {
+            default: Protected,
+            LeftSideBar: Sidebar
+        },
+        meta:{
+            requiresAuth: true
+        }
+    },
+    {
+        path : '/login', components: {
+            default: Login,
+            LeftSideBar: Sidebar
+        }
     }
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes
+})
+
+router.beforeEach((to,from,next)=>{
+    if(to.meta.requiresAuth && !authStore.isAuthenticate ){
+        next('/login')
+    }else{
+        next()
+    }
 })
 
 export default router;
