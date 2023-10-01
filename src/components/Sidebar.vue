@@ -1,5 +1,7 @@
 <script setup>
 import {authStore} from '../store/store'
+
+console.log(authStore.isAuthenticate);
 </script>
 
 <template>

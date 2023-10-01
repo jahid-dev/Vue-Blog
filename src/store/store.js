@@ -1,12 +1,12 @@
 import {ref, reactive} from 'vue'
 
 const authStore = reactive({
-    isAuthenticate: false,
+    isAuthenticate: localStorage.getItem('auth'),
     authenticate(){
-        authStore.isAuthenticate = true
+        authStore.isAuthenticate = localStorage.setItem('auth',1)
     },
     logout(){
-        authStore.isAuthenticate = false
+        authStore.isAuthenticate = localStorage.setItem('auth',0)
     }
 
 })
